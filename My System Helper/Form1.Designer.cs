@@ -55,6 +55,7 @@ namespace My_System_Helper
             this.textBox.Name = "textBox";
             this.textBox.Size = new System.Drawing.Size(781, 472);
             this.textBox.TabIndex = 0;
+            this.textBox.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // MainForm
             // 
@@ -77,7 +78,7 @@ namespace My_System_Helper
 
         #endregion
 
-        static List<string> commands = new List<string> { "закрыть","гугл","яндекс", "паблик", "элэс", "три","гугл картинки","яндекс картинки" };
+        static List<string> commands = new List<string> { "воровать мемы", "закрыть","гугл","яндекс", "паблик", "вэка", "три","гугл картинки","яндекс картинки" };
 
         static void Recognition()
         {
@@ -106,13 +107,13 @@ namespace My_System_Helper
 
         static void SpeechRecognition(object sender, SpeechRecognizedEventArgs e)
         {
-            if (e.Result.Confidence <= 0.7 || e.Result.Text == null)
+            if (e.Result.Confidence < 0.6 || e.Result.Text == null)
                 return;
 
             Action action = () =>
             {
                 main_ref.AppendTextBox(e.Result.Text);
-                main_ref.DoCommand(e.Result.Text);
+                //main_ref.DoCommand(e.Result.Text);
             };
 
             action.Invoke();
